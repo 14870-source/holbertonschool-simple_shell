@@ -1,0 +1,68 @@
+.TH SIMPLE_SHELL 1 "August 2026" "Simple Shell" "User Commands"
+
+.SH NAME
+simple_shell - a simple UNIX command interpreter
+
+.SH SYNOPSIS
+.B ./hsh
+
+.SH DESCRIPTION
+.B simple_shell
+is a simple UNIX command interpreter written in C.
+
+It reads commands from the standard input, searches for executable programs using the
+.B PATH
+environment variable, creates a child process, and executes the requested command.
+
+The shell can be used in both interactive and non-interactive modes.
+
+.SH INTERACTIVE MODE
+In interactive mode, the shell displays a prompt and waits for the user to enter a command.
+
+Example:
+.PP
+.nf
+$ ./hsh
+($) /bin/ls
+($) /bin/pwd
+($) exit
+.fi
+
+.SH NON-INTERACTIVE MODE
+The shell can read commands from standard input.
+
+Example:
+.PP
+.nf
+$ echo "/bin/ls" | ./hsh
+.fi
+
+.SH BUILT-IN COMMANDS
+.TP
+.B exit
+Exits the shell.
+
+.TP
+.B env
+Displays the current environment variables.
+
+.SH COMMAND EXECUTION
+The shell uses the
+.B PATH
+environment variable to locate executable programs.
+
+It creates a new process using
+.B fork()
+and executes the command in the child process using
+.B execve().
+The parent process waits for the child process to finish using
+.B wait().
+
+.SH ENVIRONMENT
+The shell uses the environment inherited from its parent process.
+
+.SH EXIT STATUS
+The shell returns the exit status of the last executed command.
+
+.SH AUTHORS
+Written by Shaden Saad.
