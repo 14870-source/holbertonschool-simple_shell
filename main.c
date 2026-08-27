@@ -9,8 +9,8 @@ int main(void)
 {
 	char *line = NULL;
 	size_t size = 0;
-	pid_t pid;
-	char *argv[2];
+	char *argv[64];
+	int argc;
 
 	while (1)
 	{
@@ -30,32 +30,12 @@ int main(void)
 
 		line[strcspn(line, "\n")] = '\0';
 
-		if (line[0] == '\0')
+		argc = parse_command(line, argv);
+
+		if (argc == 0)
 			continue;
 
-		argv[0] = line;
-		argv[1] = NULL;
-
-		pid = fork();
-
-		if (pid == -1)
-		{
-			perror("./hsh");
-			continue;
-		}
-
-		if (pid == 0)
-		{
-			if (execve(argv[0], argv, environ) == -1)
-			{
-				perror("./hsh");
-				exit(127);
-			}
-		}
-		else
-		{
-			wait(NULL);
-		}
+		execute_command(argv);
 	}
 
 	return (0);

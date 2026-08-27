@@ -2,17 +2,13 @@
 
 /**
  * execute_command - Executes a command
- * @command: The command to execute
+ * @argv: Array containing command and arguments
  *
  * Return: Nothing
  */
-void execute_command(char *command)
+void execute_command(char **argv)
 {
 	pid_t pid;
-	char *argv[2];
-
-	argv[0] = command;
-	argv[1] = NULL;
 
 	pid = fork();
 
@@ -34,4 +30,30 @@ void execute_command(char *command)
 	{
 		wait(NULL);
 	}
+}
+
+/**
+ * parse_command - Splits a command into arguments
+ * @line: Command line
+ * @argv: Array to store arguments
+ *
+ * Return: Number of arguments
+ */
+int parse_command(char *line, char **argv)
+{
+	char *token;
+	int argc = 0;
+
+	token = strtok(line, " \t");
+
+	while (token != NULL && argc < 63)
+	{
+		argv[argc] = token;
+		argc++;
+		token = strtok(NULL, " \t");
+	}
+
+	argv[argc] = NULL;
+
+	return (argc);
 }

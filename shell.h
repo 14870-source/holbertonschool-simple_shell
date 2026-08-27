@@ -9,6 +9,7 @@
 
 extern char **environ;
 
-void execute_command(char *command);
+void execute_command(char **argv);
+int parse_command(char *line, char **argv);
 
 #endif
