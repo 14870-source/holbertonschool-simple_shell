@@ -65,4 +65,4 @@ The shell uses the environment inherited from its parent process.
 The shell returns the exit status of the last executed command.
 
 .SH AUTHORS
-Written by Shaden Saad.
+Written by Shaden Saad , Layan Abdulrahman Alghayama .

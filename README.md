@@ -71,4 +71,5 @@ The project uses several UNIX system calls and standard C library functions, inc
 
 ## Authors
 
-* Shaden Saad , layan
+* Shaden Saad , Layan Abdulrahman Alghayama
+
