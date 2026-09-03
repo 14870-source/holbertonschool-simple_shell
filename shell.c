@@ -9,20 +9,31 @@
 void execute_command(char **argv)
 {
 	pid_t pid;
+	char *path;
+
+	path = find_command(argv[0]);
+
+	if (path == NULL)
+	{
+		fprintf(stderr, "./hsh: %s: not found\n", argv[0]);
+		return;
+	}
 
 	pid = fork();
 
 	if (pid == -1)
 	{
 		perror("./hsh");
+		free(path);
 		return;
 	}
 
 	if (pid == 0)
 	{
-		if (execve(argv[0], argv, environ) == -1)
+		if (execve(path, argv, environ) == -1)
 		{
 			perror("./hsh");
+			free(path);
 			exit(127);
 		}
 	}
@@ -30,6 +41,8 @@ void execute_command(char **argv)
 	{
 		wait(NULL);
 	}
+
+	free(path);
 }
 
 /**
