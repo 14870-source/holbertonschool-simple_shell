@@ -16,7 +16,7 @@ int execute_command(char **argv)
 
 	if (path == NULL)
 	{
-		fprintf(stderr, "./hsh: %s: not found\n", argv[0]);
+		fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
 		return (127);
 	}
 
