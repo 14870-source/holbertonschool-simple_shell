@@ -11,6 +11,7 @@ int main(void)
 	size_t size = 0;
 	char *argv[64];
 	int argc;
+	int status = 0;
 
 	while (1)
 	{
@@ -42,7 +43,7 @@ int main(void)
 		}
 
 		execute_command(argv);
-	}
+		}
 
 	return (0);
 }
