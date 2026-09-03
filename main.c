@@ -3,7 +3,7 @@
 /**
  * main - Entry point of the simple shell
  *
- * Return: Always 0
+ * Return: Exit status
  */
 int main(void)
 {
@@ -26,7 +26,7 @@ int main(void)
 			free(line);
 			if (isatty(STDIN_FILENO))
 				printf("\n");
-			return (0);
+			return (status);
 		}
 
 		line[strcspn(line, "\n")] = '\0';
@@ -39,11 +39,11 @@ int main(void)
 		if (strcmp(argv[0], "exit") == 0)
 		{
 			free(line);
-			return (0);
+			return (status);
 		}
 
-		execute_command(argv);
-		}
+		status = execute_command(argv);
+	}
 
-	return (0);
+	return (status);
 }
