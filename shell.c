@@ -6,7 +6,7 @@
  *
  * Return: Nothing
  */
-void execute_command(char **argv)
+int execute_command(char **argv)
 {
 	pid_t pid;
 	char *path;
