@@ -35,6 +35,12 @@ int main(void)
 		if (argc == 0)
 			continue;
 
+		if (strcmp(argv[0], "exit") == 0)
+		{
+			free(line);
+			return (0);
+		}
+
 		execute_command(argv);
 	}
 
