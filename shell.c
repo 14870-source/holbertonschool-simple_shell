@@ -4,19 +4,20 @@
  * execute_command - Executes a command
  * @argv: Array containing command and arguments
  *
- * Return: Nothing
+ * Return: Exit status of the command
  */
 int execute_command(char **argv)
 {
 	pid_t pid;
 	char *path;
+	int status;
 
 	path = find_command(argv[0]);
 
 	if (path == NULL)
 	{
 		fprintf(stderr, "./hsh: %s: not found\n", argv[0]);
-		return;
+		return (127);
 	}
 
 	pid = fork();
@@ -25,7 +26,7 @@ int execute_command(char **argv)
 	{
 		perror("./hsh");
 		free(path);
-		return;
+		return (1);
 	}
 
 	if (pid == 0)
@@ -39,10 +40,15 @@ int execute_command(char **argv)
 	}
 	else
 	{
-		wait(NULL);
+		wait(&status);
 	}
 
 	free(path);
+
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+
+	return (1);
 }
 
 /**
