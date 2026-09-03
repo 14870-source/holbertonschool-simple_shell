@@ -42,6 +42,13 @@ int main(void)
 			return (status);
 		}
 
+		if (strcmp(argv[0], "env") == 0)
+		{
+			print_env();
+			status = 0;
+			continue;
+		}
+
 		status = execute_command(argv);
 	}
 

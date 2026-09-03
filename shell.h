@@ -13,5 +13,6 @@ int execute_command(char **argv);
 int parse_command(char *line, char **argv);
 char *get_path(void);
 char *find_command(char *command);
+void print_env(void);
 
 #endif
